@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AnimalTreeNode } from './animal-tree-node';
 @Component({
   selector: 'an-animals-tree',
@@ -7,7 +7,7 @@ import { AnimalTreeNode } from './animal-tree-node';
     <li>
         {{rootAnimal.name}}
         <ul>
-            <li *ngFor="let childAnimal for rootAnimal.children">
+            <li *ngFor="let childAnimal of rootAnimal.children">
                 <an-animals-tree [rootAnimal]="childAnimal"></an-animals-tree>
             </li>
         </ul>
@@ -15,6 +15,7 @@ import { AnimalTreeNode } from './animal-tree-node';
   </ul>
   `
 })
-export class AnAnimalsTreeComponent {
+export class AnimalsTreeComponent {
+    @Input()
     rootAnimal: AnimalTreeNode;
 }
