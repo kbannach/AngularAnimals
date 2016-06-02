@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AnimalTreeNode } from '../app/animal-tree-node';
+import { AnimalTreeNode } from '../animal-tree-node/animal-tree-node';
 @Injectable()
 export class AnimalService {
     getRootAnimalPromise(){

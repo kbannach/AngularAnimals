@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AnimalsTreeComponent } from './animals-tree.component';
-import { AnimalTreeNode } from './animal-tree-node';
-import { AnimalService } from './animal.service';
+import { AnimalsTreeComponent } from './animals-tree-component/animals-tree.component';
+import { AnimalTreeNode } from './animal-tree-node/animal-tree-node';
+import { AnimalService } from './animal-service/animal.service';
 import { OnInit } from '@angular/core';
 //import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 @Component({

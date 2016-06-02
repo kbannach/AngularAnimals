@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { AnimalTreeNode } from './animal-tree-node';
-import { AddChildComponent } from './add-child.component';
+import { AnimalTreeNode } from '../animal-tree-node/animal-tree-node';
+import { AddChildComponent } from '../add-child/add-child.component';
 @Component({
   selector: 'an-animals-tree',
   template: `
