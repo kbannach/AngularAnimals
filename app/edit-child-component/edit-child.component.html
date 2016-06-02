@@ -1,0 +1,12 @@
+<div *ngIf="!editing">
+    <span>{{model.name}} </span>
+    <span class="add-edit-div" (click)="editClick()">[Edytuj]</span>
+</div>
+<div *ngIf="editing">
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+        <div>Nowa nazwa:
+            <input type="text" required [(ngModel)]="model.name" ngControl="name" #name="ngForm">
+            <button type="submit" [disabled]="!form.form.valid">OK</button>
+        </div>
+    </form>
+</div>

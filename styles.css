@@ -9,6 +9,9 @@ body {
 .add-edit-div {
   color: lightslategrey;
 }
+.dodaj{
+  margin: 5px 0 7px 0;
+}
 .selected {
   background-color: #CFD8DC !important;
   color: white;
