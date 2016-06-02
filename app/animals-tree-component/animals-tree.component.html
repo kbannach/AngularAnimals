@@ -3,8 +3,8 @@
         {{root.name}}
     </div>
     <ul *ngIf="root.expanded && root.children">
-        <li *ngFor="let childAnimal of root.children">
-            <an-animals-tree [root]="childAnimal"></an-animals-tree>
+        <li *ngFor="let child of root.children">
+            <an-animals-tree [root]="child"></an-animals-tree>
         </li>
         <an-add-child [parent]="root"></an-add-child>
     </ul>
