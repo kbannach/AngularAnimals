@@ -1,9 +1,10 @@
 export class AnimalTreeNode {
+    id: number;
     name: String;
     children: AnimalTreeNode[];
     expanded = false;
     
-    constructor(n: String, c: AnimalTreeNode[]) {
+    constructor(id: number, n: String, c: AnimalTreeNode[]) {
         this.name = n;
         this.children = c;
     }
