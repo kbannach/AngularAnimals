@@ -11,19 +11,20 @@
     </div>
 </li>
 <div *ngIf="!parent">
-    <form>
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
         <div>
             <label> Nazwa: </label>
-            <input type="text" required 
-                ngControl="name" #name="ngForm">
+            <input type="text" required ngControl="name" #name="ngForm">
         </div>
-        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+        <div [hidden]="name.valid" class="alert alert-danger">
             Nazwa jest wymagana
         </div>
-        <select required>
+        <div>
+            <label>Ojciec:</label>
+            <select required>
             <option *ngFor="let n of nodesList" [value]="n">{{n.name}}</option>
         </select>
-        <br>
-        <button type="submit" (click)="performAdd()">Dodaj</button>
+        </div>
+        <button type="submit" [disabled]="!form.form.valid">Dodaj</button>
     </form>
 </div>

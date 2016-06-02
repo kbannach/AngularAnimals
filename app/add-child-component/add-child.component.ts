@@ -23,11 +23,14 @@ export class AddChildComponent {
     }
 
     private getNodes(node: AnimalTreeNode): AnimalTreeNode[] {
-        let ret = node.children;
-        if (ret && ret.length > 0) {
-            ret.forEach(n => {
-                ret = ret.concat(this.getNodes(n));
-            });
+        let ret: AnimalTreeNode[] = [];
+        if (node) {
+            ret.push(node);
+            if (node.children.length > 0) {
+                node.children.forEach(n => {
+                    ret = ret.concat(this.getNodes(n));
+                });
+            }
         }
         return ret;
     }
@@ -40,7 +43,7 @@ export class AddChildComponent {
         this.adding = true;
     }
 
-    performAdd() {
+    onSubmit() {
 
         this.adding = false;
     }
