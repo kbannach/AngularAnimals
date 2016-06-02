@@ -17,14 +17,6 @@ export class AddChildComponent implements OnInit {
 
     constructor(private animalService: AnimalService) { }
 
-    getAllNodes() {
-        this.animalService.getRootAnimalPromise()
-            .then(ret => {
-                this.select = ret;
-                this.nodesList = this.getNodes(ret);
-            });
-    }
-
     private getNodes(node: AnimalTreeNode): AnimalTreeNode[] {
         let ret: AnimalTreeNode[] = [];
         if (node) {
@@ -39,7 +31,11 @@ export class AddChildComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getAllNodes();
+        this.animalService.getRootAnimalPromise()
+            .then(ret => {
+                this.select = ret;
+                this.nodesList = this.getNodes(ret);
+            });
     }
 
     onChange() { }
@@ -49,7 +45,10 @@ export class AddChildComponent implements OnInit {
     }
 
     onSubmit() {
-        this.select.children.push(new AnimalTreeNode(this.nameInput, []));
+        let node = this.animalService.getById(this.select.id);
+        if (node) {
+            node.children.push(new AnimalTreeNode(Math.random(), this.nameInput, []));
+        }
         this.adding = false;
     }
 }
