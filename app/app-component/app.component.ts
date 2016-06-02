@@ -9,28 +9,27 @@ import { AddChildComponent } from '../add-child-component/add-child.component';
   selector: 'my-app',
   template: `
   <h1>Animals Tree</h1>
+  <div>
+    <an-add-child></an-add-child>
+  </div>
   <ul class="animals">
     <an-animals-tree 
       [root]="root">
      </an-animals-tree>
   </ul>
-  <div>
-    <label>test</label>
-    <an-add-child></an-add-child>
-  </div>
   `,
-  directives: [/*ROUTER_DIRECTIVES,*/AnimalsTreeComponent,AddChildComponent],
+  directives: [/*ROUTER_DIRECTIVES,*/AnimalsTreeComponent, AddChildComponent],
   providers: [/*ROUTER_PROVIDERS,*/AnimalService]
 })
 export class AppComponent implements OnInit {
   root: AnimalTreeNode;
-  
-  constructor(private animalService: AnimalService){ }
-  
+
+  constructor(private animalService: AnimalService) { }
+
   getRootAnimal() {
     this.animalService.getRootAnimalPromise().then(ret => this.root = ret);
   }
- 
+
   ngOnInit() {
     this.getRootAnimal();
   }
