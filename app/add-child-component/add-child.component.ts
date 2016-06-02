@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AnimalTreeNode } from '../animal-tree-node/animal-tree-node';
 import { NgForm } from '@angular/common';
 import { AnimalService } from '../animal-service/animal.service';
-import { OnInit } from '@angular/core';
+
 @Component({
     selector: 'an-add-child',
     templateUrl: 'app/add-child-component/add-child.component.html',
