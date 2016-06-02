@@ -26,11 +26,7 @@ export class AppComponent implements OnInit {
 
   constructor(private animalService: AnimalService) { }
 
-  getRootAnimal() {
-    this.animalService.getRootAnimalPromise().then(ret => this.root = ret);
-  }
-
   ngOnInit() {
-    this.getRootAnimal();
+    this.animalService.getRootAnimalPromise().then(ret => this.root = ret);
   }
 }
