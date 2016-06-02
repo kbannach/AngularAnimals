@@ -1,11 +1,11 @@
 <li *ngIf="root">
     <div (click)="root.expand()">
-        {{root.name}}
+        <an-edit-child [model]="root"></an-edit-child>
     </div>
     <ul *ngIf="root.expanded && root.children">
         <li *ngFor="let child of root.children">
             <an-animals-tree [root]="child"></an-animals-tree>
         </li>
-        <an-add-child [parent]="root"></an-add-child>
+        <p class="dodaj"><an-add-child [parent]="root"></an-add-child></p>
     </ul>
 </li>
