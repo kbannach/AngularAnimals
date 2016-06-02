@@ -8,9 +8,11 @@ import { OnInit } from '@angular/core';
     templateUrl: 'app/add-child-component/add-child.component.html',
     providers: [AnimalService]
 })
-export class AddChildComponent {
+export class AddChildComponent implements OnInit {
     adding = false;
     @Input() parent: AnimalTreeNode;
+    select: AnimalTreeNode;
+    nameInput = "";
     nodesList: AnimalTreeNode[];
 
     constructor(private animalService: AnimalService) { }
@@ -18,6 +20,7 @@ export class AddChildComponent {
     getAllNodes() {
         this.animalService.getRootAnimalPromise()
             .then(ret => {
+                this.select = ret;
                 this.nodesList = this.getNodes(ret);
             });
     }
@@ -39,12 +42,14 @@ export class AddChildComponent {
         this.getAllNodes();
     }
 
+    onChange() { }
+
     addClick() {
         this.adding = true;
     }
 
     onSubmit() {
-
+        this.select.children.push(new AnimalTreeNode(this.nameInput, []));
         this.adding = false;
     }
 }

@@ -15,15 +15,15 @@
         <form (ngSubmit)="onSubmit()" #form="ngForm">
             <div>
                 <label> Nazwa: </label>
-                <input type="text" required ngControl="name" #name="ngForm">
+                <input type="text" required [(ngModel)]="nameInput" ngControl="name" #name="ngForm">
             </div>
             <div [hidden]="name.valid" class="alert alert-danger">
                 Nazwa jest wymagana
             </div>
             <div>
                 <label>Przypnij do:</label>
-                <select required>
-            <option *ngFor="let n of nodesList" [value]="n">{{n.name}}</option>
+                <select required [(ngModel)]="select" (ngModelChange)="onChange()">
+            <option *ngFor="let n of nodesList" [ngValue]="n">{{n.name}}</option>
         </select>
             </div>
             <button type="submit" [disabled]="!form.form.valid">Dodaj</button>
