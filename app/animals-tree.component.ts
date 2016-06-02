@@ -1,21 +1,25 @@
 import { Component, Input } from '@angular/core';
 import { AnimalTreeNode } from './animal-tree-node';
+import { AddChildComponent } from './add-child.component';
 @Component({
   selector: 'an-animals-tree',
   template: `
-  <ul class="animals">
-    <li>
-        {{rootAnimal.name}}
-        <ul>
-            <li *ngFor="let childAnimal of rootAnimal.children">
-                <an-animals-tree [rootAnimal]="childAnimal"></an-animals-tree>
-            </li>
-        </ul>
-    </li>
-  </ul>
-  `
+  <li *ngIf="root">
+    <div (click)="root.expand()">
+        {{root.name}}
+    </div>
+    <ul *ngIf="root.expanded && root.children">
+        <li *ngFor="let childAnimal of root.children">
+            <an-animals-tree
+                [root]="childAnimal">
+            </an-animals-tree>
+        </li>
+        <an-add-child [parent]="root"></an-add-child>
+    </ul>
+  </li>
+  `,
+  directives: [AnimalsTreeComponent,AddChildComponent]
 })
 export class AnimalsTreeComponent {
-    @Input()
-    rootAnimal: AnimalTreeNode;
+    @Input() root: AnimalTreeNode;
 }
