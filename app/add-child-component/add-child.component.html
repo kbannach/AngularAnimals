@@ -1,0 +1,29 @@
+<li *ngIf="parent">
+    <div *ngIf="adding">
+        <form>
+            <label> Nazwa: </label>
+            <input type="text" required>
+            <button type="submit" (click)="performAdd()">Dodaj</button>
+        </form>
+    </div>
+    <div *ngIf="!adding" (click)="addClick()">
+        +
+    </div>
+</li>
+<div *ngIf="!parent">
+    <form>
+        <div>
+            <label> Nazwa: </label>
+            <input type="text" required 
+                ngControl="name" #name="ngForm">
+        </div>
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+            Nazwa jest wymagana
+        </div>
+        <select required>
+            <option *ngFor="let n of nodesList" [value]="n">{{n.name}}</option>
+        </select>
+        <br>
+        <button type="submit" (click)="performAdd()">Dodaj</button>
+    </form>
+</div>
