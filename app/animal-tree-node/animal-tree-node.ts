@@ -3,13 +3,14 @@ export class AnimalTreeNode {
     name: String;
     children: AnimalTreeNode[];
     expanded = false;
-    
+
     constructor(id: number, n: String, c: AnimalTreeNode[]) {
+        this.id = id;
         this.name = n;
         this.children = c;
     }
-    
-    expand(){
+
+    expand() {
         this.expanded = !this.expanded;
     }
 }
