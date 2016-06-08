@@ -3,7 +3,7 @@
         <form (ngSubmit)="onSubmit()" #form_="ngForm">
             <div>
                 <label> Nazwa: </label>
-                <input type="text" required ngControl="name_" #name_="ngForm">
+                <input type="text" required [(ngModel)]="nameInput" ngControl="name_" #name_="ngForm">
             </div>
             <div [hidden]="name_.valid" class="alert alert-danger">
                 Nazwa jest wymagana
