@@ -22,7 +22,7 @@ export class AnimalService {
     };
 
     constructor() {
-        this.observable$ = new Observable(observer => this.observer = observer).share();
+        this.observable$ = new Observable(observer => this.observer = observer);
     }
     
     getNodes(){

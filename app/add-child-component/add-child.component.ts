@@ -18,19 +18,6 @@ export class AddChildComponent implements OnInit, OnDestroy {
 
     constructor(private animalService: AnimalService) { }
 
-    private getNodes(node: AnimalTreeNode): AnimalTreeNode[] {
-        let ret: AnimalTreeNode[] = [];
-        if (node) {
-            ret.push(node);
-            if (node.children.length > 0) {
-                node.children.forEach(n => {
-                    ret = ret.concat(this.getNodes(n));
-                });
-            }
-        }
-        return ret;
-    }
-
     ngOnInit() {
         this.subscribcion = this.animalService.observable$.subscribe(ret => {
             this.nodesList = this.getNodes(ret);
@@ -59,5 +46,18 @@ export class AddChildComponent implements OnInit, OnDestroy {
         }
         this.animalService.getNodes();
         this.adding = false;
+    }
+
+    private getNodes(node: AnimalTreeNode): AnimalTreeNode[] {
+        let ret: AnimalTreeNode[] = [];
+        if (node) {
+            ret.push(node);
+            if (node.children.length > 0) {
+                node.children.forEach(n => {
+                    ret = ret.concat(this.getNodes(n));
+                });
+            }
+        }
+        return ret;
     }
 }
