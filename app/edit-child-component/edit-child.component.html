@@ -1,6 +1,7 @@
 <div *ngIf="!editing">
     <span>{{model.name}} </span>
     <span class="add-edit-div" (click)="editClick()">[Edytuj]</span>
+    <span class="add-edit-div" (click)="usun()">[Usuń]</span>
 </div>
 <div *ngIf="editing">
     <form (ngSubmit)="onSubmit()" #form="ngForm">

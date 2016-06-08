@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { AnimalTreeNode } from '../animal-tree-node/animal-tree-node';
 import { NgForm } from '@angular/common';
+import { AnimalService } from '../animal-service/animal.service';
 
 @Component({
     selector: 'an-edit-child',
@@ -10,15 +11,18 @@ export class EditChildComponent {
     editing = false;
     @Input() model: AnimalTreeNode;
 
+    constructor(private animalService: AnimalService) { }
+
     editClick() {
         this.editing = true;
     }
 
+    usun() {
+        this.animalService.removeNodeById(this.model.id);
+        this.animalService.getNodes();
+    }
+
     onSubmit() {
-        console.log("name: " + this.model.name);
-        for (let c of this.model.children) {
-            console.log("child: " + c.name);
-        }
         this.editing = false;
     }
 }
