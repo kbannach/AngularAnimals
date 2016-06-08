@@ -1,18 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { AnimalTreeNode } from '../animal-tree-node/animal-tree-node';
 import { NgForm } from '@angular/common';
 import { AnimalService } from '../animal-service/animal.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'an-add-child',
     templateUrl: 'app/add-child-component/add-child.component.html'
 })
-export class AddChildComponent implements OnInit {
+export class AddChildComponent implements OnInit, OnDestroy {
     adding = false;
     @Input() parent: AnimalTreeNode;
     select: AnimalTreeNode;
     nameInput = "";
     nodesList: AnimalTreeNode[];
+    subscribcion: Subscription;
 
     constructor(private animalService: AnimalService) { }
 
@@ -30,13 +32,17 @@ export class AddChildComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.animalService.observable$.subscribe(ret => {
+        this.subscribcion = this.animalService.observable$.subscribe(ret => {
             this.nodesList = this.getNodes(ret);
             if (!this.select) {
                 this.select = ret;
             }
         });
         this.animalService.getNodes();
+    }
+
+    ngOnDestroy() {
+        this.subscribcion.unsubscribe();
     }
 
     onChange() { }
