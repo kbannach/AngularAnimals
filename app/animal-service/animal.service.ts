@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AnimalTreeNode } from '../animal-tree-node/animal-tree-node';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+import 'rxjs/add/operator/share';
+
 @Injectable()
 export class AnimalService {
     private waz = new AnimalTreeNode(8, "wąż", []);
@@ -11,15 +15,34 @@ export class AnimalService {
     private ssaki = new AnimalTreeNode(2, "Ssaki", [this.czlowiek, this.pies]);
     private root = new AnimalTreeNode(1, "Zwierzęta", [this.ssaki, this.ptaki, this.gady]);
 
-    getRootAnimalPromise() {
-        return Promise.resolve(this.root);
+    observable$: Observable<AnimalTreeNode>;
+    private observer: Observer<AnimalTreeNode>;
+    private _dataStore: {
+        rootNode: AnimalTreeNode;
+    };
+
+    constructor() {
+        this.observable$ = new Observable(observer => this.observer = observer).share();
+        //this.observer.next(this.root);
     }
+    
+    getNodes(){
+        this.observer.next(this.root);
+    }
+
+    /*getRootAnimalPromise() {
+        return Promise.resolve(this.root);
+    }*/
 
     getById(id: number) {
         let ret: AnimalTreeNode;
-        this.getRootAnimalPromise()
-            .then(root => ret = this.findById(id, root));
-        return ret;
+        return this.findById(id, this.root);
+    }
+
+    addItemToNodeById(toAdd:AnimalTreeNode, rootId: number){
+        let root = this.findById(rootId, this.root);
+        root.children.push(toAdd);
+        this.observer.next(this.root);
     }
 
     private findById(id: number, child: AnimalTreeNode) {

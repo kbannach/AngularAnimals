@@ -5,8 +5,7 @@ import { AnimalService } from '../animal-service/animal.service';
 
 @Component({
     selector: 'an-add-child',
-    templateUrl: 'app/add-child-component/add-child.component.html',
-    providers: [AnimalService]
+    templateUrl: 'app/add-child-component/add-child.component.html'
 })
 export class AddChildComponent implements OnInit {
     adding = false;
@@ -31,11 +30,18 @@ export class AddChildComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.animalService.getRootAnimalPromise()
+        this.animalService.observable$.subscribe(ret => {
+            this.nodesList = this.getNodes(ret);
+            if (!this.select) {
+                this.select = ret;
+            }
+        });
+        this.animalService.getNodes();
+        /*this.animalService.getRootAnimalPromise()
             .then(ret => {
                 this.select = ret;
                 this.nodesList = this.getNodes(ret);
-            });
+            });*/
     }
 
     onChange() { }
@@ -49,6 +55,14 @@ export class AddChildComponent implements OnInit {
         if (node) {
             node.children.push(new AnimalTreeNode(Math.random(), this.nameInput, []));
         }
+        this.animalService.getNodes();
+        //this.animalService.addItemToNodeById(new AnimalTreeNode(Math.random(), this.nameInput, []), this.select.id);
+        /*this.animalService.getRootAnimalPromise()
+            .then(ret => {
+                ret.children.forEach(c => {
+                    console.log("c: " + c.name);
+                });
+            });*/
         this.adding = false;
     }
 }
