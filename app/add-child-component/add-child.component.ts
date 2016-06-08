@@ -46,9 +46,10 @@ export class AddChildComponent implements OnInit {
     }
 
     onSubmit() {
-        let node = this.animalService.getById(this.select.id);
-        if (node) {
-            node.children.push(new AnimalTreeNode(Math.random(), this.nameInput, []));
+        if (this.parent) {
+            this.parent.children.push(new AnimalTreeNode(Math.random(), this.nameInput, []));
+        } else {
+            this.select.children.push(new AnimalTreeNode(Math.random(), this.nameInput, []));
         }
         this.animalService.getNodes();
         this.adding = false;

@@ -29,15 +29,15 @@ export class AnimalService {
         this.observer.next(this.root);
     }
 
-    getById(id: number) {
-        let ret: AnimalTreeNode;
-        return this.findById(id, this.root);
-    }
-
     addItemToNodeById(toAdd:AnimalTreeNode, rootId: number){
         let root = this.findById(rootId, this.root);
         root.children.push(toAdd);
         this.observer.next(this.root);
+    }
+    
+    getById(id: number) {
+        let ret: AnimalTreeNode;
+        return this.findById(id, this.root);
     }
 
     private findById(id: number, child: AnimalTreeNode) {
