@@ -37,11 +37,6 @@ export class AddChildComponent implements OnInit {
             }
         });
         this.animalService.getNodes();
-        /*this.animalService.getRootAnimalPromise()
-            .then(ret => {
-                this.select = ret;
-                this.nodesList = this.getNodes(ret);
-            });*/
     }
 
     onChange() { }
@@ -56,13 +51,6 @@ export class AddChildComponent implements OnInit {
             node.children.push(new AnimalTreeNode(Math.random(), this.nameInput, []));
         }
         this.animalService.getNodes();
-        //this.animalService.addItemToNodeById(new AnimalTreeNode(Math.random(), this.nameInput, []), this.select.id);
-        /*this.animalService.getRootAnimalPromise()
-            .then(ret => {
-                ret.children.forEach(c => {
-                    console.log("c: " + c.name);
-                });
-            });*/
         this.adding = false;
     }
 }

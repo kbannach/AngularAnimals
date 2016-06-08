@@ -23,16 +23,11 @@ export class AnimalService {
 
     constructor() {
         this.observable$ = new Observable(observer => this.observer = observer).share();
-        //this.observer.next(this.root);
     }
     
     getNodes(){
         this.observer.next(this.root);
     }
-
-    /*getRootAnimalPromise() {
-        return Promise.resolve(this.root);
-    }*/
 
     getById(id: number) {
         let ret: AnimalTreeNode;

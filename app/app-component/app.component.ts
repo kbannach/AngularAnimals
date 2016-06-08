@@ -4,11 +4,10 @@ import { AnimalTreeNode } from '../animal-tree-node/animal-tree-node';
 import { AnimalService } from '../animal-service/animal.service';
 import { OnInit } from '@angular/core';
 import { AddChildComponent } from '../add-child-component/add-child.component';
-//import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+
 @Component({
   selector: 'my-app',
   template: `
-  <h1>Animals Tree</h1>
   <div>
     <an-add-child></an-add-child>
   </div>
@@ -18,8 +17,8 @@ import { AddChildComponent } from '../add-child-component/add-child.component';
      </an-animals-tree>
   </ul>
   `,
-  directives: [/*ROUTER_DIRECTIVES,*/AnimalsTreeComponent, AddChildComponent],
-  providers: [/*ROUTER_PROVIDERS,*/AnimalService]
+  directives: [AnimalsTreeComponent, AddChildComponent],
+  providers: [AnimalService]
 })
 export class AppComponent implements OnInit {
   root: AnimalTreeNode;
@@ -31,6 +30,5 @@ export class AppComponent implements OnInit {
       this.root = ret;
     });
     this.animalService.getNodes();
-    //this.animalService.getRootAnimalPromise().then(ret => this.root = ret);
   }
 }
